@@ -28,9 +28,15 @@ Route::pattern('subject','(Chinese|English|Math)');
 
 Route::get('/','HomeController@index');
 
+
+
 Route::group(['prefix'=>'student'],function(){
 	Route::get('{student_no}', ['as'=> 'student','uses'=> 'StudentController@getStudentData']);
 	Route::get('{student_no}/score/{subject?}', ['as'=> 'student.score','uses'=> 'StudentController@getStudentScore']);
+});
+
+Route::group(['namespace'=>'Cool'],function(){
+	Route::get('cool','TestController@index');
 });
 /*
 Route::get('student/{student_no}', function ($student_no) {
