@@ -26,6 +26,8 @@ Route::get('student/{student_no}/score/{subject}', function ($student_no,$subjec
 Route::pattern('student_no','3A[0-9]{6}');
 Route::pattern('subject','(Chinese|English|Math)');
 
+Route::get('/','HomeController@index');
+
 Route::group(['prefix'=>'student'],function(){
 Route::get('{student_no}', ['as'=> 'student','uses'=> function ($student_no) {
 		return "學號：".$student_no;
