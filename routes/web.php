@@ -23,20 +23,25 @@ Route::get('student/{student_no}/score/{subject}', function ($student_no,$subjec
     return "學號 ".$student_no." 的 ".$subject." 成績";
 });
 */
+Route::get('/board','BoardController@getIndex');
 Route::pattern('student_no','3A[0-9]{6}');
 Route::pattern('subject','(Chinese|English|Math)');
 
 Route::get('/','HomeController@index');
 
-
-
-Route::group(['prefix'=>'student'],function(){
-	Route::get('{student_no}', ['as'=> 'student','uses'=> 'StudentController@getStudentData']);
-	Route::get('{student_no}/score/{subject?}', ['as'=> 'student.score','uses'=> 'StudentController@getStudentScore']);
+Route::group(['namespace' => 'Cool'],function (){
+    Route::get('cool', 'TestController@index');
 });
 
-Route::group(['namespace'=>'Cool'],function(){
-	Route::get('cool','TestController@index');
+Route::group(['prefix'=>'student'],function(){
+    Route::get('{student_no}',[
+        'as'=>'student',
+        'uses'=>'StudentController@getStudentData'
+    ]);    
+    Route::get('{student}/score/{subject?}',[
+        'as'=>'student.score',
+        'uses'=>'StudentController@getStudentScore'
+    ]);
 });
 /*
 Route::get('student/{student_no}', function ($student_no) {
