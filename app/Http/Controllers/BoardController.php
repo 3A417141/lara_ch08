@@ -7,13 +7,10 @@ use App\Score;
 
 class BoardController extends Controller
 {
-    public function getIndex()
-    {
-        public function getIndex(){
+    public function getIndex(){
         $scores = Score::orderByTotal()
                 ->orderBySubject()->get();
         $data = ['scores' => $scores];
         return view('board', $data);
-    }
     }
 }
